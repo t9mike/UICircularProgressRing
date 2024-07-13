@@ -1,16 +1,24 @@
 {
-  "object": {
-    "pins": [
-      {
-        "package": "SnapshotTesting",
-        "repositoryURL": "https://github.com/luispadron/swift-snapshot-testing.git",
-        "state": {
-          "branch": "master",
-          "revision": "8e9f6855674c885abfce358f5ad3f2f632d2c51f",
-          "version": null
-        }
+  "originHash" : "6c2b38f3ac7edb806f7a9c975ff19d156ccbb7d78d9e134f446d7943120f1086",
+  "pins" : [
+    {
+      "identity" : "swift-snapshot-testing",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/luispadron/swift-snapshot-testing.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "641ad58daf62c4577dbcb23a80b1e437a459daf6"
       }
-    ]
-  },
-  "version": 1
+    },
+    {
+      "identity" : "uicircularprogressring",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/luispadron/UICircularProgressRing",
+      "state" : {
+        "branch" : "v7.0",
+        "revision" : "ae4223a5bc9c7982c9d9275f9e3c2cb790eaf3dd"
+      }
+    }
+  ],
+  "version" : 3
 }

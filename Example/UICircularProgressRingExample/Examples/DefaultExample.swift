@@ -27,11 +27,23 @@ struct DefaultExample: View {
 
     var body: some View {
         VStack {
-            ProgressRing(progress: $progress)
-                .animation(.easeInOut(duration: 5))
+            let lineWidth = 30
+            ProgressRing(
+                progress: $progress,
+                outerRingStyle: .init(color: .color(.blue), strokeStyle: .init(lineWidth: CGFloat(lineWidth))),
+                innerRingStyle: .init(color: .color(.red), strokeStyle: .init(lineWidth: CGFloat(lineWidth)))
+            )
+            .animation(.easeInOut(duration: self.progress.asDouble == 0 ? 0.5 : 5))
                 .padding(32)
 
-            Button(action: { self.onDidTapSubject.send(()) }) {
+            Button(action: {
+                if self.progress.asDouble == 0 {
+                    self.progress = .percent(1)
+                } else {
+                    self.progress = .percent(0)
+                }
+//                self.onDidTapSubject.send(())
+            }) {
                 buttonLabel
             }
                 .padding(16)
