@@ -12,18 +12,7 @@ import SwiftUI
 
 struct DefaultExample: View {
     @State private var progress: RingProgress = .percent(0)
-
-    private let onDidTapSubject = PassthroughSubject<Void, Never>()
-    private var onDidTapPublisher: AnyPublisher<Void, Never> {
-        onDidTapSubject.eraseToAnyPublisher()
-    }
-
-    private var progressPublisher: AnyPublisher<RingProgress, Never> {
-        onDidTapPublisher
-            .map { self.progress == .percent(1) ? RingProgress.percent(0) : RingProgress.percent(1) }
-            .prepend(progress)
-            .eraseToAnyPublisher()
-    }
+    @State private var isRunning = false
 
     var body: some View {
         VStack {
@@ -33,16 +22,13 @@ struct DefaultExample: View {
                 outerRingStyle: .init(color: .color(.blue), strokeStyle: .init(lineWidth: CGFloat(lineWidth))),
                 innerRingStyle: .init(color: .color(.red), strokeStyle: .init(lineWidth: CGFloat(lineWidth)))
             )
-            .animation(.easeInOut(duration: self.progress.asDouble == 0 ? 0.5 : 5))
                 .padding(32)
 
             Button(action: {
-                if self.progress.asDouble == 0 {
-                    self.progress = .percent(1)
-                } else {
-                    self.progress = .percent(0)
+                withAnimation(.linear(duration: isRunning ? 1.0 : 5.0)) {
+                    self.progress = isRunning ? .percent(0) : .percent(1)
+                    self.isRunning.toggle()
                 }
-//                self.onDidTapSubject.send(())
             }) {
                 buttonLabel
             }
@@ -53,9 +39,6 @@ struct DefaultExample: View {
                 .offset(y: -32)
         }
         .navigationBarTitle("Basic")
-        .onReceive(progressPublisher) { progress in
-            self.progress = progress
-        }
     }
 
     private var buttonLabel: some View {
