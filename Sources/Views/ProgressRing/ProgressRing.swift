@@ -140,12 +140,12 @@ extension ProgressRing: View {
                         color: innerRingStyle.color,
                         strokeStyle: innerRingStyle.strokeStyle
                     )
-                    .modifier(
-                        AnimatablePercentTextModifier(
-                            percent: progress.asDouble ?? 0.0,
-                            label: label
-                        )
-                    )
+//                    .modifier(
+//                        AnimatablePercentTextModifier(
+//                            percent: progress.asDouble ?? 0.0,
+//                            label: label
+//                        )
+//                    )
                     .padding(CGFloat(innerRingStyle.padding))
                 }
             }
